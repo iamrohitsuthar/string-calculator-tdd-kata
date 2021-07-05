@@ -11,7 +11,7 @@ void main() {
   );
 
   test(
-    'Given a one digit string, when an add operation is performed, then that digit is returned',
+    'Given a one number string, when an add operation is performed, then that number is returned',
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("1"), 1);
@@ -19,7 +19,7 @@ void main() {
   );
 
   test(
-    'Given a two digit string, when an add operation is performed, then sum of that two digits is returned',
+    'Given a two numbers string, when an add operation is performed, then sum of that two numbers is returned',
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("1,2"), 3);
@@ -27,7 +27,7 @@ void main() {
   );
 
   test(
-    'Given a mutli digit string, when an add operation is performed, then sum of that digits is returned',
+    'Given a mutliple numbers string, when an add operation is performed, then sum of that numbers is returned',
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("1,2,3,4,5,6,7,8,9,10"), 55);
@@ -35,7 +35,7 @@ void main() {
   );
 
   test(
-    'Given a digit string with \n or , as a seperator, when an add operation is performed, then sum of that digits is returned',
+    'Given a numbers string with \n or , as a seperator, when an add operation is performed, then sum of that numbers is returned',
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("1\n2,3"), 6);
@@ -43,7 +43,7 @@ void main() {
   );
 
   test(
-    'Given a digit string with custom separator, when an add operation is performed, then sum of that digits is returned',
+    'Given a numbers string with custom separator, when an add operation is performed, then sum of that numbers is returned',
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("//;\n1;2"), 3);

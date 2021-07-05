@@ -2,8 +2,6 @@ class StringCalculator {
   int add(String numbers) {
     if (numbers.isEmpty)
       return 0;
-    else if (numbers.length == 1)
-      return int.parse(numbers);
     else {
       int sum = 0;
       List<String> numbersList;
