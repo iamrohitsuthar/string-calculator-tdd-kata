@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:string_calculator_tdd_kata/negative_number_exception.dart';
 import 'package:string_calculator_tdd_kata/string_calculator.dart';
 
 void main() {
@@ -15,6 +16,7 @@ void main() {
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("1"), 1);
+      expect(stringCalculator.add("8"), 8);
     },
   );
 
@@ -39,14 +41,81 @@ void main() {
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("1\n2,3"), 6);
+      expect(stringCalculator.add("1\n2"), 3);
     },
   );
 
   test(
-    'Given a numbers string with custom separator, when an add operation is performed, then sum of that numbers is returned',
+    'Given a numbers string with custom separator of length one char, when an add operation is performed, then sum of that numbers is returned',
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("//;\n1;2"), 3);
+    },
+  );
+
+  test(
+    'Given a numbers string without custom separator line i.e with ; as default separator, when an add operation is performed, then sum of that numbers is returned',
+    () {
+      final stringCalculator = StringCalculator();
+      expect(stringCalculator.add("1;2"), 3);
+    },
+  );
+
+  test(
+    'Given a numbers string with single negative number, when an add operation is performed, then exception is throwned',
+    () {
+      try {
+        final stringCalculator = StringCalculator();
+        stringCalculator.add("-1,2");
+      } on NegativeNumberException catch (exception) {
+        expect(exception.message, 'negatives not allowed -1');
+      }
+    },
+  );
+
+  test(
+    'Given a numbers string with multiple negative numbers, when an add operation is performed, then exception is throwned',
+    () {
+      try {
+        final stringCalculator = StringCalculator();
+        stringCalculator.add("-1,2\n3,-4");
+      } on NegativeNumberException catch (exception) {
+        expect(exception.message, 'negatives not allowed -1 -4');
+      }
+    },
+  );
+
+  test(
+    'Given a numbers string having some numbers greater than 1000, when an add operation is performed, then only the sum of numbers which are less than or equal to 1000 is returned',
+    () {
+      final stringCalculator = StringCalculator();
+      expect(stringCalculator.add("//,\n5,1005"), 5);
+      expect(stringCalculator.add("//,\n1,1000,2"), 1003);
+    },
+  );
+
+  test(
+    'Given a numbers string with custom separator of length more than one char, when an add operation is performed, then sum of that numbers is returned',
+    () {
+      final stringCalculator = StringCalculator();
+      expect(stringCalculator.add("//[***]\n1***2***3"), 6);
+      expect(stringCalculator.add("//[,,,]\n1,,,2,,,3"), 6);
+    },
+  );
+
+  test(
+    'Given a numbers string with multiple custom separators of length one char, when an add operation is performed, then sum of that numbers is returned',
+    () {
+      final stringCalculator = StringCalculator();
+      expect(stringCalculator.add("//[*][%]\n1*2%3"), 6);
+    },
+  );
+
+  test(
+    'Given a numbers string with multiple custom separators of length more than one char, when an add operation is performed, then sum of that numbers is returned',
+    () {
+      final stringCalculator = StringCalculator();
+      expect(stringCalculator.add("//[***][###][!!!]\n1###2***3!!!4"), 10);
     },
   );
 }
