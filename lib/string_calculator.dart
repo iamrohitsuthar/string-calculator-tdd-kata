@@ -62,8 +62,11 @@ class StringCalculator {
       if (symbol == '[')
         start = index;
       else if (symbol == ']') {
-        extractedDelimiters.write(
-            getRegExpEncodedDelimiter(rawDelimiters, start, index) + '|');
+        extractedDelimiters
+            .write(getRegExpEncodedDelimiter(rawDelimiters, start, index));
+        if (index != rawDelimiters.length - 1) {
+          extractedDelimiters.write('|');
+        }
       }
     }
     return extractedDelimiters.toString();

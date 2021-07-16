@@ -90,7 +90,7 @@ void main() {
     () {
       final stringCalculator = StringCalculator();
       expect(stringCalculator.add("//,\n5,1005"), 5);
-      expect(stringCalculator.add("//,\n1,1000,2"), 1003);
+      expect(stringCalculator.add("//,\n1,1000,22"), 1023);
     },
   );
 
@@ -98,7 +98,7 @@ void main() {
     'Given a numbers string with custom separator of length more than one char, when an add operation is performed, then sum of that numbers is returned',
     () {
       final stringCalculator = StringCalculator();
-      expect(stringCalculator.add("//[***]\n1***2***3"), 6);
+      expect(stringCalculator.add("//[***]\n1***22***3"), 26);
       expect(stringCalculator.add("//[,,,]\n1,,,2,,,3"), 6);
     },
   );
@@ -115,7 +115,7 @@ void main() {
     'Given a numbers string with multiple custom separators of length more than one char, when an add operation is performed, then sum of that numbers is returned',
     () {
       final stringCalculator = StringCalculator();
-      expect(stringCalculator.add("//[***][###][!!!]\n1###2***3!!!4"), 10);
+      expect(stringCalculator.add("//[***][###][!!!]\n1###2***3!!!44"), 50);
     },
   );
 }
